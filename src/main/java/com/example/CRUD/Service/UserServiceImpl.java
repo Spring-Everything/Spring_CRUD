@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 // }
 // 이 어노테이션 사용 시 위와 같은 문법 필요없음
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
 
     // 회원가입
-    @Override
+    // @Override
     public UserDTO createUser(UserDTO userDTO) {
         // UserEntity 클래스에서 userEntity 객체를 생성하여 DTO를 엔티티로 변환하여 저장 준비
         UserEntity userEntity = userDTO.dtoToEntity();
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
     }
 
     // 회원조회
-    @Override
+    // @Override
     public List<UserDTO> getAllUsers() {
         // 저장소에서 모든 사용자 엔티티 조회 후 DTO로 변환하여 리스트로 수집
         List<UserDTO> userList = userRepository.findAll().stream()
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
     }
 
     // 회원수정
-    @Override
+    // @Override
     public UserDTO updateUser(UserDTO userDTO, Long id) {
         // ID로 사용자 엔티티 조회, 없으면 예외 발생
         UserEntity userEntity = userRepository.findById(id).orElseThrow();
