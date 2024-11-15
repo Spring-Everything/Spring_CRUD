@@ -34,6 +34,12 @@ public class UserController {
         return ResponseEntity.ok(userServiceImpl.getAllUsers());
     }
 
+    // uid로 회원조회
+    @GetMapping("/{uid}")
+    public ResponseEntity<UserDTO> getUserByUid(@PathVariable("uid") String uid) {
+        return ResponseEntity.ok(userServiceImpl.getUserByUid(uid));
+    }
+
     // 회원수정
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long id) {

@@ -24,7 +24,6 @@ public class UserServiceImpl {
     private final UserRepository userRepository;
 
     // 회원가입
-    // @Override
     public UserDTO createUser(UserDTO userDTO) {
         // UserEntity 클래스에서 userEntity 객체를 생성하여 DTO를 엔티티로 변환하여 저장 준비
         UserEntity userEntity = userDTO.dtoToEntity();
@@ -36,7 +35,6 @@ public class UserServiceImpl {
     }
 
     // 회원조회
-    // @Override
     public List<UserDTO> getAllUsers() {
         // 저장소에서 모든 사용자 엔티티 조회 후 DTO로 변환하여 리스트로 수집
         List<UserDTO> userList = userRepository.findAll().stream()
@@ -48,8 +46,14 @@ public class UserServiceImpl {
         return userList;
     }
 
+    // uid로 회원조회
+    public UserDTO getUserByUid(String uid){
+        UserEntity userEntity = userRepository.findByUid(uid).orElseThrow();
+        logger.info(uid + " 유저 조회 완료");
+        return UserDTO.entityToDto(userEntity);
+    }
+
     // 회원수정
-    // @Override
     public UserDTO updateUser(UserDTO userDTO, Long id) {
         // ID로 사용자 엔티티 조회, 없으면 예외 발생
         UserEntity userEntity = userRepository.findById(id).orElseThrow();
